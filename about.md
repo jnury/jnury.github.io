@@ -4,12 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
-
-### Contact me
-
-[email@domain.com](mailto:email@domain.com)
+Highly focused on automation and PowerShell scripting, I currently work on DSC deployment technology, Administrator privileges reduction with JEA and deployment in Azure cloud.
