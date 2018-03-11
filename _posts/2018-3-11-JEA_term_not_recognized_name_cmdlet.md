@@ -84,14 +84,14 @@ Let's say you only want to expose one simple command in your JEA endpoint: myCus
 
 You should have a Role Capability file containing:
 
-```PowerShell
+```powershell
 ModulesToImport = 'myCustomModule'
 VisibleFunctions = 'myCustomModule\Invoke-MyCustomFunction'
 ```
 
 The following configuration will provide the same functionnality:
 
-```PowerShell
+```powershell
 ModulesToImport = 'myCustomModule'
 FunctionDefinitions = @(
 	@{Name = 'Invoke-MyCustomFunction'; ScriptBlock = { Param ($MyParam1, $MyParam2) myCustomModule\Invoke-MyCustomFunction -Param1 $MyParam1 -Param2 $MyParam2 }}
@@ -112,7 +112,7 @@ As the missing functions are from the same module (Microsoft.PowerShell.Utility)
 
 The file should looks like:
 
-```PowerShell
+```powershell
 @{
 GUID="389eba42-94a4-44b8-afd9-176d0961063c"
 FunctionsToExport= "Get-FileHash", "New-TemporaryFile", "New-Guid", "Format-Hex", "Import-PowerShellDataFile", "ConvertFrom-SddlString"
@@ -122,7 +122,7 @@ NestedModules="MPS.Utility.psm1"
 
 Now import the module in your Role Capability configuration:
 
-```PowerShell
+```powershell
 ModulesToImport = 'myCustomModule', 'MPS.Utility'
 VisibleFunctions = 'myCustomModule\Invoke-MyCustomFunction'
 ```
