@@ -49,10 +49,86 @@ If a *VisibleFunctions* or *VisibleCmdlets* argument is provided in either PSSes
 * Microsoft.PowerShell.Utility
 * Microsoft.WSMan.Management
 
-If the command you run need a cmdlet provided by a module that is not loaded at session initialization, you have to explicitly import it thru a ModuleToImport statement in either your PSSession Configuration or a Role Capability file.
+If the command you run needs a cmdlet provided by a module that is not loaded at session initialization, you have to explicitly import it thru a ModuleToImport statement in either your PSSession Configuration or a Role Capability file.
 
 # You face a PowerShell JEA bug
 
 When a *VisibleFunctions* or *VisibleCmdlets* argument is provided in either PSSession Configuration or a Role Capability file, functions of default loaded modules disappear.
 
 I filled an issue for that on GitHub: <https://github.com/PowerShell/JEA/issues/42>
+
+This bug only affects functions from the modules that are loaded without being in the ModulesToImport list. So far, I only found 6 functions from the Microsoft.PowerShell.Utility; on Windows 2012R2 these functions are:
+
+* ConvertFrom-SddlString
+* Format-Hex
+* Get-FileHash
+* Import-PowerShellDataFile
+* New-Guid
+* New-TemporaryFile
+
+There are 3 workarounds you can use.
+
+## Don't use these functions
+
+If you authored the PowerShell code calling these missing functions, you can rewrite your code to avoid using them.
+
+New-Guid can easily be replaced by the expression *[guid]::newGuid()*
+
+Other functions are more complex but you can find the code behind them in file C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psm1
+
+## Don't use VisibleFunctions or VisibleCmdlets
+
+If you have not authored the code and don't want to change it. You may replace Visiblexxx parameter by a proxy function
+
+Let's say you only want to expose one simple command in your JEA endpoint: myCustomModule\Invoke-MyCustomFunction.
+
+You should have a Role Capability file containing:
+
+```PowerShell
+ModulesToImport = 'myCustomModule'
+VisibleFunctions = 'myCustomModule\Invoke-MyCustomFunction'
+```
+
+The following configuration will provide the same functionnality:
+
+```PowerShell
+ModulesToImport = 'myCustomModule'
+FunctionDefinitions = @(
+	@{Name = 'Invoke-MyCustomFunction'; ScriptBlock = { Param ($MyParam1, $MyParam2) myCustomModule\Invoke-MyCustomFunction -Param1 $MyParam1 -Param2 $MyParam2 }}
+)
+```
+
+Of course, it only works with 'simple ParameterSet' functions and you'll have to update the Role Capability each time Param block of the exposed function eveolves.
+
+## Duplicate missing functions in an other module
+
+It may be the easier solution, but it's not very 'elegant' ...
+
+As the missing functions are from the same module (Microsoft.PowerShell.Utility), the following method is easy to apply:
+
+* Copy the file C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psm1 to C:\Program Files\WindowsPowerShell\Modules\MPS.Utility\MPS.Utility.psm1
+* Copy the file C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1 to C:\Program Files\WindowsPowerShell\Modules\MPS.Utility\MPS.Utility.psd1
+* Edit C:\Program Files\WindowsPowerShell\Modules\MPS.Utility\MPS.Utility.psd1 to remove cmdlets and replace the GUID
+
+The file should looks like:
+
+```PowerShell
+@{
+GUID="389eba42-94a4-44b8-afd9-176d0961063c"
+FunctionsToExport= "Get-FileHash", "New-TemporaryFile", "New-Guid", "Format-Hex", "Import-PowerShellDataFile", "ConvertFrom-SddlString"
+NestedModules="MPS.Utility.psm1"
+}
+```
+
+Now import the module in your Role Capability configuration:
+
+```PowerShell
+ModulesToImport = 'myCustomModule', 'MPS.Utility'
+VisibleFunctions = 'myCustomModule\Invoke-MyCustomFunction'
+```
+
+It works because when ModulesToImport is processed, functions from Microsoft.PowerShell.Utility have already disappeared and there is no duplicate declaration.
+
+By the way there may be some side effect and you may miss updated functions at the next PowerShell update ...
+
+Hope this bug will be adressed by MS team :-)
