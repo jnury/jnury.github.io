@@ -17,6 +17,7 @@ Note: this article is based on the following PS Session Configuration parameters
 # The cmdlet or function your try to launch is not visible
 
 By default, JEA endpoints only expose 8 functions:
+
 ```
 [localhost]: PS>Get-Command
 
@@ -31,6 +32,7 @@ Function        Measure-Object
 Function        Out-Default
 Function        Select-Object
 ```
+
 To make other functions visible, you have to edit your PSSession Configuration file or your Role Capability file. See: 
 
 # The module providing a required cmdlet is not loaded
