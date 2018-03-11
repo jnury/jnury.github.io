@@ -33,13 +33,13 @@ Function        Out-Default
 Function        Select-Object
 ```
 
-To make other functions visible, you have to edit your PSSession Configuration or your Role Capability file to add *VisibleFunctions* or *VisibleCmdlets* statement(s). See: <https://docs.microsoft.com/en-us/powershell/jea/role-capabilities>
+To make other functions visible, you have to edit or create a Role Capability file to add *VisibleFunctions* or *VisibleCmdlets* statement(s). See: <https://docs.microsoft.com/en-us/powershell/jea/role-capabilities>
 
 # The module providing a required cmdlet is not loaded
 
-If no *VisibleFunctions* or *VisibleCmdlets* argument is provided in either PSSession Configuration or a Role Capability file, **all** modules located in an eligible module directory ($env:PSModulePath) are loaded.
+If no *VisibleFunctions* or *VisibleCmdlets* argument is provided in a Role Capability file, **all** modules located in an eligible module directory ($env:PSModulePath) are loaded.
 
-If a *VisibleFunctions* or *VisibleCmdlets* argument is provided in either PSSession Configuration or a Role Capability file, only a few modules are loaded at session initialization time :
+If a *VisibleFunctions* or *VisibleCmdlets* argument is provided in a Role Capability file, only a few modules are loaded at session initialization time :
 
 * Microsoft.PowerShell.Core
 * Microsoft.PowerShell.Diagnostics
@@ -49,13 +49,13 @@ If a *VisibleFunctions* or *VisibleCmdlets* argument is provided in either PSSes
 * Microsoft.PowerShell.Utility
 * Microsoft.WSMan.Management
 
-If the command you run needs a cmdlet provided by a module that is not loaded at session initialization, you have to explicitly import it thru a ModuleToImport statement in either your PSSession Configuration or a Role Capability file.
+If the command you run needs a cmdlet provided by a module that is not loaded at session initialization, you have to explicitly import it thru a ModuleToImport statement in either your Role Capability file.
 
 # You face a PowerShell JEA bug
 
-When a *VisibleFunctions* or *VisibleCmdlets* argument is provided in either PSSession Configuration or a Role Capability file, functions of default loaded modules disappear.
+When a *VisibleFunctions* or *VisibleCmdlets* argument is provided in a Role Capability file, functions of default loaded modules disappear.
 
-So, you may encounter an error on New-Guid function even if Microsoft.PowerShell.Utility is loaded.
+So, you may encounter an error on New-Guid function even if Microsoft.PowerShell.Utility is loaded by default.
 
 I filled an issue for that on GitHub: <https://github.com/PowerShell/JEA/issues/42>
 
