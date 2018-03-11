@@ -33,7 +33,7 @@ Function        Out-Default
 Function        Select-Object
 ```
 
-To make other functions visible, you have to edit your PSSession Configuration file or your Role Capability file. See: 
+To make other functions visible, you have to edit your PSSession Configuration or your Role Capability file to add *VisibleFunctions* or *VisibleCmdlets* statement(s). See: <https://docs.microsoft.com/en-us/powershell/jea/role-capabilities>
 
 # The module providing a required cmdlet is not loaded
 
@@ -54,6 +54,8 @@ If the command you run needs a cmdlet provided by a module that is not loaded at
 # You face a PowerShell JEA bug
 
 When a *VisibleFunctions* or *VisibleCmdlets* argument is provided in either PSSession Configuration or a Role Capability file, functions of default loaded modules disappear.
+
+So, you may encounter an error on New-Guid function even if Microsoft.PowerShell.Utility is loaded.
 
 I filled an issue for that on GitHub: <https://github.com/PowerShell/JEA/issues/42>
 
@@ -78,7 +80,7 @@ Other functions are more complex but you can find the code behind them in file C
 
 ## Don't use VisibleFunctions or VisibleCmdlets
 
-If you have not authored the code and don't want to change it. You may replace Visiblexxx parameter by a proxy function
+If you have not authored the code and don't want to change it. You may replace Visiblexxx parameter by a proxy function.
 
 Let's say you only want to expose one simple command in your JEA endpoint: myCustomModule\Invoke-MyCustomFunction.
 
