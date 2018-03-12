@@ -110,15 +110,16 @@ As the missing functions are from the same module (Microsoft.PowerShell.Utility)
 
 * Copy the file C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psm1 to C:\Program Files\WindowsPowerShell\Modules\MPS.Utility\MPS.Utility.psm1
 * Copy the file C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1 to C:\Program Files\WindowsPowerShell\Modules\MPS.Utility\MPS.Utility.psd1
-* Edit C:\Program Files\WindowsPowerShell\Modules\MPS.Utility\MPS.Utility.psd1 to remove cmdlets and replace the GUID
+* Edit C:\Program Files\WindowsPowerShell\Modules\MPS.Utility\MPS.Utility.psd1 to change GUID and let only function references and mandatory fields.
 
 The file should looks like:
 
 ```powershell
 @{
-GUID="389eba42-94a4-44b8-afd9-176d0961063c"
-FunctionsToExport= "Get-FileHash", "New-TemporaryFile", "New-Guid", "Format-Hex", "Import-PowerShellDataFile", "ConvertFrom-SddlString"
-NestedModules="MPS.Utility.psm1"
+GUID = '1dbed294-8d1e-4e22-a32c-6fe8af86549f'
+ModuleVersion = '0.1.0'
+FunctionsToExport = 'Get-FileHash', 'New-TemporaryFile', 'New-Guid', 'Format-Hex', 'Import-PowerShellDataFile', 'ConvertFrom-SddlString'
+RootModule = 'MPSU.psm1'
 }
 ```
 
