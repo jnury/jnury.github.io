@@ -11,6 +11,14 @@ These are two version of the script as lCM is slightly different between PowerSh
 
 Default values come from the PowerShell command *Get-DscLocalConfigurationManager* on a clean machine.
 
+Just save one of these scripts as *Reset-DscLocalConfigurationManager.ps1* and run as follow to reset a remote host's LCM:
+
+```
+.\Reset-DscLocalConfigurationManager.ps1 -ComputerName 'remote_computer_to_reset'
+```
+
+Or simply *.\Reset-DscLocalConfigurationManager.ps1* to reset localhost's LCM.
+
 # Reset LCM configuration on PowerShell 5
 
 The following script will reset all parameters of the LCM to their default values on PowerShell 5.0 and PowerShell 5.1.
