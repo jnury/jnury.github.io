@@ -18,7 +18,7 @@ When a JEA endpoint is setted with the *SessionType = 'RestrictedRemoteServer'* 
 * Out-Default
 * Select-Object
 
-These 8 functions are not the 'real' functions. They are proxy functions intended to let you have a minimal set of command to interact with the endpoint while not being able to to somthing harmfull.
+These 8 functions are not the 'real' functions. They are proxy functions intended to let you have a minimal set of command to interact with the endpoint while not being able to do something harmfull.
 
 For example, the 'real' *Get-Command* function accepts the following syntaxes:
 
