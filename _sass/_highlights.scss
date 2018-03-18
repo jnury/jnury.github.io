@@ -3,14 +3,17 @@ div.highlight {
   background-color: #efefef;
   padding: 7px 7px 7px 10px;
   border: 1px solid #ddd;
-  // -moz-box-shadow: 3px 3px rgba(0,0,0,0.1);
-  // -webkit-box-shadow: 3px 3px rgba(0,0,0,0.1);
-  // box-shadow: 3px 3px rgba(0,0,0,0.1);
-  // margin: 20px 0 20px 0;
-  max-width: 880px;
   overflow: scroll;
   font-size: 80%;
 }
+
+pre {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+ }
 
 code {
   font-family:'Bitstream Vera Sans Mono','Courier', monospace;
