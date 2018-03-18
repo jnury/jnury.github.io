@@ -7,7 +7,7 @@ If you want your LCM to stop querying a PullServer or simply restore default val
 
 ![_config.yml]({{ site.baseurl }}/images/reset.jpg)
 
-These are two version of the script as lCM is slightly different between PowerShell 4 and Powershell 5.
+Here are two versions of the script as lCM is slightly different between PowerShell V4 and V5.
 
 Default values come from the PowerShell command *Get-DscLocalConfigurationManager* on a clean machine.
 
@@ -71,13 +71,13 @@ There are 2 more parameters in PowerShell V5:
 * PartialConfigurations (doesn't accept $null value)
 * SignatureValidationPolicy (doesn't accept 'NONE' value)
 
-As these 2 parameters don't accept values returned by Get-DscLocalConfigurationManager, I did not included them in the script.
+As these 2 parameters don't accept values returned by Get-DscLocalConfigurationManager, I did not include them in the script.
 
-For now, I was not able to test what happen if these values aren't reset.
+For now, I was not able to test what happens if these values aren't reset.
 
 # Reset LCM configuration on PowerShell 4
 
-The following script will reset all parameters of the LCM to their default values on PowerShell 5.0 and PowerShell 5.1.
+The following script will reset all parameters of the LCM to their default values on PowerShell 4.0.
 
 ```powershell
 [CmdletBinding()]
