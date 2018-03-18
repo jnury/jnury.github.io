@@ -22,7 +22,7 @@ These 8 functions are not the 'real' functions. They are proxy functions intende
 
 For example, the 'real' *Get-Command* function accepts the following syntaxes:
 
-```powershell
+```
 Get-Command [[-ArgumentList] <Object[]>] [-Verb <string[]>] [-Noun <string[]>] [-Module <string[]>] [-FullyQualifiedModule <ModuleSpecification[]>] [-TotalCount <int>] [-Syntax] [-ShowCommandInfo] [-All] [-ListImported] [-ParameterName <string[]>] [-ParameterType <PSTypeName[]>] [<CommonParameters>]
 
 Get-Command [[-Name] <string[]>] [[-ArgumentList] <Object[]>] [-Module <string[]>] [-FullyQualifiedModule <ModuleSpecification[]>] [-CommandType <CommandTypes>] [-TotalCount <int>] [-Syntax] [-ShowCommandInfo] [-All] [-ListImported] [-ParameterName <string[]>] [-ParameterType <PSTypeName[]>] [<CommonParameters>]
@@ -30,7 +30,7 @@ Get-Command [[-Name] <string[]>] [[-ArgumentList] <Object[]>] [-Module <string[]
 
 But the *Get-Command exposed in a JEA endpoint only has a few parameters:
 
-```powershell
+```
 Get-Command [[-Name] <string[]>] [[-Module] <string[]>] [[-ArgumentList] <Object[]>] [[-CommandType] <CommandTypes>] [-ListImported] [-ShowCommandInfo] [<CommonParameters>]
 ```
 
@@ -68,7 +68,7 @@ Inside a module, or inside a custom function (defined in a Role Capablity for ex
 
 So, inside a module, the following command will work:
 
-```powershell
+```
 Microsoft.PowerShell.Core\Get-Command -All
 ```
 
@@ -76,7 +76,7 @@ Microsoft.PowerShell.Core\Get-Command -All
 
 In addition, this is the syntax of the 8 default functions in a RestrictedRemoteServer JEA (Windows PowerShell 5.1.14409 on W2012R2 server):
 
-```powershell
+```
 Clear-Host
 
 Exit-PSSession [<CommonParameters>]
