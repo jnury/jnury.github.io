@@ -1,6 +1,6 @@
 ---
 layout: post
-title: DSC - How to reset LCM configuration
+title: DSC - How to reset LCM configuration ?
 ---
 
 If you want your LCM to stop querying a PullServer or simply restore default values of the Local Configuration Manager, you have to apply a configuration based on default values.
