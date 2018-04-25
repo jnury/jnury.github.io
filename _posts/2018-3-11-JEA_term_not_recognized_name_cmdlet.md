@@ -57,7 +57,9 @@ When a *VisibleFunctions* or *VisibleCmdlets* argument is provided in a Role Cap
 
 So, you may encounter an error on New-Guid function even if Microsoft.PowerShell.Utility is loaded by default.
 
-I filled an issue for that on GitHub: <https://github.com/PowerShell/JEA/issues/42>
+This issue is documented in GitHub: ['VisibleCmdlets' and 'VisibleFunctions' break internal functions usage](https://github.com/PowerShell/JEA/issues/42)
+
+You can also vote on UserVoice to get it investigated by the MS team: [WMF 5.1 RestrictedRemoteServer session type fails to import the 'Microsoft.PowerShell.Utility' module](https://windowsserver.uservoice.com/forums/301869-powershell/suggestions/17852350-wmf-5-1-restrictedremoteserver-session-type-fails)
 
 This bug only affects functions from the modules that are loaded without being in the ModulesToImport list. So far, I only found 6 functions from the Microsoft.PowerShell.Utility; on Windows 2012R2 these functions are:
 
